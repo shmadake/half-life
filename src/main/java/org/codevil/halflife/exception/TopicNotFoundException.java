@@ -1,4 +1,7 @@
 package org.codevil.halflife.exception;
 
-public class TopicNotFoundException {
+public class TopicNotFoundException extends RuntimeException {
+    public TopicNotFoundException(String message) {
+        super(message);
+    }
 }
