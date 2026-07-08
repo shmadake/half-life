@@ -5,6 +5,7 @@ import org.codevil.halflife.dto.AuthResponse;
 import org.codevil.halflife.dto.LoginRequest;
 import org.codevil.halflife.dto.RegisterRequest;
 import org.codevil.halflife.entity.User;
+import org.codevil.halflife.exception.UserAlreadyExistsException;
 import org.codevil.halflife.repository.UserRepository;
 import org.codevil.halflife.security.JwtUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +22,7 @@ public class AuthService {
     public AuthResponse register(RegisterRequest request) {
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already registered");
+            throw new UserAlreadyExistsException("Account already exists. Please log in.");
         }
 
         User user = new User();
